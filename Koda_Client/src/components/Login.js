@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import LoginForm from './LoginForm'
 import {signIn} from '../actions'
@@ -8,6 +9,7 @@ const Login = (props) => {
       <div>
           <LoginForm onSubmit={props.signIn}/>
           <div>Userid: {props.userId}</div>
+          <Link to="/register">Register</Link>
       </div>
   )
 }

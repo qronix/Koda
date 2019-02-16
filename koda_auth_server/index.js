@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 
 app.post('/register',(req,res) => {
     const body = (_.pick(req.body,["username","password","email"]))
+    res.send(`I got your shit ${body.username}`)
 })
 
 
