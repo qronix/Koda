@@ -6,7 +6,6 @@ const INITIAL_STATE = {
 }
 
 export default(state=INITIAL_STATE, action)=>{
-    console.log(action)
     switch(action.type){
         case ALERT:
             return {...state, message:action.payload.message, hidden:action.payload.hidden}

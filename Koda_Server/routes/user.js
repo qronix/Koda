@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const { network } = require('../apis/network')
-const _ = require('lodash')
+const { verifyRegisterData } = require('../middleware/verifyRegisterData')
 
-router.post('/register', async function register (req, res, next) {
-  const body = _.pick(req.body, ['username', 'password', 'password_confirm', 'email'])
-  const response = await network.post('/register', body)
-  console.log(response)
+router.post('/register', verifyRegisterData, async function register (req, res, next) {
+  // const response = await network.post('/register', req.body)
+  // res.send(response.data)
+  // console.log(response.data)
 })
 
 module.exports = router

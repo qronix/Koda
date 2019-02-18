@@ -19,6 +19,10 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use(user)
+app.use(function (err, req, res, next) {
+  console.log(err.message)
+  res.status(400).send(err.message)
+})
 
 // app.post('/login', (req, res) => {
 //   res.send({ userId: 999999 })

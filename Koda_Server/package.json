@@ -15,7 +15,8 @@
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.11",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "validator": "^10.11.0"
   },
   "devDependencies": {
     "errorhandler": "^1.5.0",

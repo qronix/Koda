@@ -11,7 +11,7 @@ const {User} = require('./db/models/user')
 app.use(bodyParser.json())
 
 app.post('/register',(req,res) => {
-    const body = (_.pick(req.body,["username","password","email"]))
+    const body = (_.pick(req.body,["username","password","password_confirm","email"]))
     res.send(`I got your shit ${body.username}`)
 })
 

@@ -10,15 +10,20 @@ export const signIn = formValues => async (dispatch, getState) =>{
 }
 
 export const register = formValues => async (dispatch, getState) => {
-    const response = await network.post('/register',{...formValues})
-    console.log(`Received register response as: ${response}`)
+    var response = null
+    try{
+        response = await network.post('/register',{...formValues})
+        dispatch(alert(response.data))
+    }catch(err){
+        dispatch(alert(err.response.data))
+    }    
 }
 
 export const alert = (message) => (dispatch,getState)=>{
     setTimeout(()=>{
         dispatch(clearAlert())
     },2000)
-    dispatch ({type:ALERT, payload:message})
+    dispatch ({type:ALERT, payload:{message,hidden:false}})
 }
 
 const clearAlert = () =>{
