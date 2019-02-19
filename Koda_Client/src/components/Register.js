@@ -6,13 +6,13 @@ import {register, alert} from '../actions'
 const Register = (props) => {
     return (
         <div>
-            <RegisterForm onSubmit={props.register} alert={(message)=>props.alert(message)}/>
+            <RegisterForm onSubmit={props.register} alert={(message)=>props.alert(message)} registering={props.registering}/>
         </div>
     )
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return state
+    return {registering:state.user.registering}
 }
 
 export default connect(mapStateToProps,{register, alert})(Register)

@@ -1,4 +1,4 @@
-import {SIGN_IN, REGISTER, ALERT} from './types'
+import {SIGN_IN, REGISTER_REQUEST, ALERT, REGISTER_SUCCESS} from './types'
 import network from '../apis/network'
 
 export const signIn = formValues => async (dispatch, getState) =>{
@@ -12,8 +12,11 @@ export const signIn = formValues => async (dispatch, getState) =>{
 export const register = formValues => async (dispatch, getState) => {
     var response = null
     try{
+        dispatch({type: REGISTER_REQUEST})
         response = await network.post('/register',{...formValues})
+        dispatch({type: REGISTER_SUCCESS})
         dispatch(alert(response.data))
+        // dispatch({type:REGISTER, payload:})
     }catch(err){
         dispatch(alert(err.response.data))
     }    

@@ -28,6 +28,7 @@ const verifyRegisterData = function (req, res, next) {
   if (!validator.isEmail(email)) {
     return next(new Error('Email is not valid'))
   }
+  req.body = _.omit(body, ['password_confirm'])
   next()
 }
 
