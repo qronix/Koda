@@ -1,9 +1,8 @@
-import {SIGN_IN, REGISTER_REQUEST, ALERT, REGISTER_SUCCESS} from './types'
+import {SIGN_IN, REGISTER_REQUEST, ALERT, REGISTER_SUCCESS, REGISTER_FAILURE} from './types'
 import network from '../apis/network'
 
 export const signIn = formValues => async (dispatch, getState) =>{
     const response = await network.post('/login',{...formValues})
-    console.log(response)
     if(response){
         dispatch({type:SIGN_IN, payload:response.data.userId})
     }
@@ -14,11 +13,17 @@ export const register = formValues => async (dispatch, getState) => {
     try{
         dispatch({type: REGISTER_REQUEST})
         response = await network.post('/register',{...formValues})
-        dispatch({type: REGISTER_SUCCESS})
-        dispatch(alert(response.data))
-        // dispatch({type:REGISTER, payload:})
+        if(response){
+            dispatch({type: REGISTER_SUCCESS})
+            dispatch(alert(response.data))
+        }
     }catch(err){
-        dispatch(alert(err.response.data))
+        dispatch({type: REGISTER_FAILURE})
+        if(err.response){
+            dispatch(alert(err.response.data))
+        } else{
+            dispatch(alert('A network error occurred'))
+        }
     }    
 }
 

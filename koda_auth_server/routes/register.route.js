@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../db/models/user')
-const _ = require('lodash')
 
 //add middleware to validate the register request originated from
 //the resource server and not from a third party
@@ -17,4 +16,4 @@ router.post('/register', async (req,res)=>{
    }
 })
 
-module.exports = router
+module.exports = router 
