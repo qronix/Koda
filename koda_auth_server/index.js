@@ -16,7 +16,9 @@ app.use(register)
 //     res.send(`I got your shit ${body.username}`)
 // })
 
-
+app.use(function(err,req,res,next){
+    res.send(err)
+})
 app.listen(PORT, () => {
     console.log(`Auth server listening on port ${PORT}`)
 })

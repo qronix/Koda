@@ -20,7 +20,7 @@ export const register = formValues => async (dispatch, getState) => {
     }catch(err){
         dispatch({type: REGISTER_FAILURE})
         if(err.response){
-            dispatch(alert(err.response.data))
+            dispatch(alert(err.message))
         } else{
             dispatch(alert('A network error occurred'))
         }

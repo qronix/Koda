@@ -17,16 +17,11 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json())
 app.use(cors())
-app.use(function (err, req, res, next) {
-  console.log(err.message)
-  res.status(400).send(err.message)
-})
 app.use(user)
 
-
-// app.post('/login', (req, res) => {
-//   res.send({ userId: 999999 })
-// })
+app.use(function (err, req, res, next) {
+  res.send(err.message)
+})
 
 app.listen(PORT, () => {
   console.log('server started on port 3001')

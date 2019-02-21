@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const validator = require('validator')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const userSchema = new Schema({
     username: {
@@ -31,5 +32,12 @@ const userSchema = new Schema({
     },
     created: {type: Date, default: Date.now}
 })
+userSchema.plugin(uniqueValidator)
+
+// userSchema.post('save',(error,doc,next)=>{
+//     if(error.code === 11000){
+//         const message = error.errmsg
+//     }
+// })
 
 module.exports = mongoose.model('User', userSchema)
