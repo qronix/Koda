@@ -1,5 +1,6 @@
 import {SIGN_IN, REGISTER_REQUEST, ALERT, REGISTER_SUCCESS, REGISTER_FAILURE} from './types'
 import network from '../apis/network'
+import history from '../history'
 
 export const signIn = formValues => async (dispatch, getState) =>{
     const response = await network.post('/login',{...formValues})
@@ -15,12 +16,13 @@ export const register = formValues => async (dispatch, getState) => {
         response = await network.post('/register',{...formValues})
         if(response){
             dispatch({type: REGISTER_SUCCESS})
-            dispatch(alert(response.data))
+            dispatch(alert(`Success ${response.data}`))
+            history.push('/login')
         }
     }catch(err){
         dispatch({type: REGISTER_FAILURE})
         if(err.response){
-            dispatch(alert(err.message))
+            dispatch(alert(`Error ${err.response.data}`))
         } else{
             dispatch(alert('A network error occurred'))
         }

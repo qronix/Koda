@@ -1,16 +1,17 @@
 import React from 'react'
-import {BrowserRouter,Switch, Route} from 'react-router-dom'
+import {Router,Switch, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Header from './Header'
 import Home from './Home'
 import Login from './Login'
 import Register from './Register'
+import history from '../history'
 
 const App = (props) => {
   return (
     <div className="ui container">
     <div className={`ui floating message ${(props.alert.hidden) ? 'hidden' : ''}`}>{props.alert.message}</div>
-      <BrowserRouter>
+      <Router history={history}>
         <div>
             <Header/>
             <Switch>
@@ -19,7 +20,7 @@ const App = (props) => {
               <Route path='/register' exact component={Register}></Route>
             </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     </div>
   )
 }

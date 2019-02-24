@@ -1,10 +1,12 @@
 {
     "test":{
         "PORT": 3001,
-        "MONGODB_URI":"mongodb://localhost:27017/KodaTest"
+        "MONGODB_URI":"mongodb://localhost:27017/KodaTest",
+        "AUTHKEY": "X%ay@hHm>7~3Km[@&CELmULCX(q8k(t8"
     },
     "development":{
         "PORT": 3001,
-        "MONGODB_URI": "mongodb://localhost:27017/Koda"
+        "MONGODB_URI": "mongodb://localhost:27017/Koda",
+        "AUTHKEY": "X%ay@hHm>7~3Km[@&CELmULCX(q8k(t8"
     }
 }
