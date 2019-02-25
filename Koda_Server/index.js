@@ -20,7 +20,7 @@ app.use(cors())
 app.use(user)
 
 app.use(function (err, req, res, next) {
-  res.status(400).send(err.message)
+  res.status(422).json({ error: err.message })
 })
 
 app.listen(PORT, () => {

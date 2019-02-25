@@ -6,10 +6,11 @@ const USERNAME_LENGTH_MIN = 5
 const PASSWORD_LENGTH_MIN = 8
 
 const verifyRegisterData = function (req, res, next) {
-  const body = _.pick(req.body, ['username', 'password', 'password_confirm', 'email'])
-  const { username, password, password_confirm, email } = body
+//   const body = _.pick(req.body, ['username', 'password', 'password_confirm', 'email'])
+  const { user } = req.body
+  const { username, password, password_confirm, email } = user
   //    check length of body object
-  if (_.size(req.body) !== ITEMS_IN_REGISTER_OBJECT) {
+  if (_.size(user) !== ITEMS_IN_REGISTER_OBJECT) {
     return next(new ApplicationError('Registration form is not complete'))
   }
   //    verify username length
@@ -28,7 +29,7 @@ const verifyRegisterData = function (req, res, next) {
   if (!validator.isEmail(email)) {
     return next(new Error('Email is not valid'))
   }
-  req.body = _.omit(body, ['password_confirm'])
+  req.body = _.omit(req.body, ['password_confirm'])
   next()
 }
 

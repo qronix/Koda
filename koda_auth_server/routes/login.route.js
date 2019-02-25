@@ -9,15 +9,16 @@ router.post('/login',authRequest,auth.optional,async function(req,res, next){
     const {body:{user}} = req
 
     if(!user.username){
-        return res.status(422).send('Username is required')
+        return res.status(422).json({error:'Username is required'})
     }
     if(!user.password){
-        return res.status(422).send('Password is required')
+        return res.status(422).json({error:'Password is required'})
     }
 
-    return passport.authenticate('local',{session: false}, (err,passportUser, info)=>{
+    // user can be redirected via the passport option object
+    return passport.authenticate('local',{session: false}, (err,passportUser)=>{
         if(err){
-            return res.status(401).send('Could not login')
+            return res.status(401).json({error:'Could not login'})
         }
         if(passportUser){
             const user = passportUser
@@ -26,7 +27,7 @@ router.post('/login',authRequest,auth.optional,async function(req,res, next){
             return res.json({user:user.toAuthJSON()})
         }
 
-        return res.status(400).info
+        return res.status(400).json({error:'Invalid login credentials'})
     })(req,res,next)
 })
 

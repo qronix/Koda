@@ -18,10 +18,6 @@ const userSchema = new Schema({
             message: '{VALUE} is not alphanumeric'
         }
     },
-    password: {
-        type: String,
-        required: true
-    },
     salt:{
         type: String,
         required: true
