@@ -3,17 +3,20 @@ import network from '../apis/network'
 import history from '../history'
 
 export const signIn = formValues => async (dispatch, getState) =>{
-    const response = await network.post('/login',{...formValues})
-    if(response){
-        dispatch({type:SIGN_IN, payload:response.data.userId})
+    try{
+        const response = await network.post('/login',{ user: { ...formValues } })
+        if(response){
+            dispatch({type:SIGN_IN, payload:response.data.userId})
+        }
+    } catch (err){
+
     }
 }
 
 export const register = formValues => async (dispatch, getState) => {
-    var response = null
     try{
         dispatch({type: REGISTER_REQUEST})
-        response = await network.post('/register',{...formValues})
+        const response = await network.post('/register',{...formValues})
         if(response){
             dispatch({type: REGISTER_SUCCESS})
             dispatch(alert(`Success ${response.data}`))

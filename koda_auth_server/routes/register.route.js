@@ -10,7 +10,7 @@ const auth = require('../middleware/auth')
 //the resource server and not from a third party
 router.post('/register', authRequest, async function register(req,res,next){
     const {body: {user}} = req
-
+    debugger
     if(!user.username){
         return res.status(422).json({
             error:'Username is required',
@@ -37,17 +37,6 @@ router.post('/register', authRequest, async function register(req,res,next){
             error:errorMessage
         })
     }
-//     debugger
-//    const user = new User(req.body)
-//    try{
-//     const createdUser = await user.save()
-//     if(createdUser.username){
-//         res.status(200).send('Registration complete')
-//     }
-//    } catch (err) {
-//        const errorMessage = constructError(err)
-//        res.status(500).send(errorMessage)
-//    }
 })
 
 module.exports = router 

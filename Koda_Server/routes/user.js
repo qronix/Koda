@@ -13,11 +13,11 @@ router.post('/register', verifyRegisterData, async function register (req, res, 
       return next(new ApplicationError('Could not register'))
     } else {
       if (response.status === 200) {
-        res.status(200).send(response.data)
+        res.status(200).json({ success: response.data })
       }
     }
   } catch (err) {
-    if (err.response.status === 500) {
+    if (err.response.status === 500 || err.response.status === 422) {
       return next(new ApplicationError(err.response.data))
     }
     return next(new ApplicationError('A network error occurred'))
@@ -27,13 +27,13 @@ router.post('/register', verifyRegisterData, async function register (req, res, 
 router.post('/login', verifyLoginData, async function login (req, res, next) {
   // verify login data
   try {
-    const response = await network.post('/login', { user: { ...req.body } })
+    const response = await network.post('/login', { user: { ...req.body.user }, AUTHKEY })
     if (!response) {
       return next(new ApplicationError('Could not login'))
     } else {
       if (response.status === 200) {
         // need to handle JWT?
-        res.status(200).send(response.data)
+        res.status(200).json({ user: response.data })
       }
     }
   } catch (err) {

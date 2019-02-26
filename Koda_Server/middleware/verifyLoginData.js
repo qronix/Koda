@@ -1,7 +1,7 @@
 const ApplicationError = require('../_helpers/applicationError')
 
 const verifyLoginData = function (req, res, next) {
-  const { username, password } = req.body
+  const { username, password } = req.body.user
   if (!username) {
     return next(new ApplicationError('Username is required'))
   }
