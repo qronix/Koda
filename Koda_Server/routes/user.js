@@ -13,7 +13,7 @@ router.post('/register', verifyRegisterData, async function register (req, res, 
       return next(new ApplicationError('Could not register'))
     } else {
       if (response.status === 200) {
-        res.status(200).json({ success: response.data })
+        res.status(200).json({ success: 'Successfully registered', user: response.data })
       }
     }
   } catch (err) {
@@ -33,7 +33,7 @@ router.post('/login', verifyLoginData, async function login (req, res, next) {
     } else {
       if (response.status === 200) {
         // need to handle JWT?
-        res.status(200).json({ user: response.data })
+        res.status(200).json({ success: 'Logged in successfully', user: response.data })
       }
     }
   } catch (err) {

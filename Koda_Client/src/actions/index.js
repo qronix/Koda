@@ -7,25 +7,28 @@ export const signIn = formValues => async (dispatch, getState) =>{
         const response = await network.post('/login',{ user: { ...formValues } })
         if(response){
             dispatch({type:SIGN_IN, payload:response.data.userId})
+            dispatch(alert(response.data.success))
         }
     } catch (err){
-
+        dispatch(alert(`Error ${err.response.data}`))
     }
 }
 
 export const register = formValues => async (dispatch, getState) => {
     try{
         dispatch({type: REGISTER_REQUEST})
-        const response = await network.post('/register',{...formValues})
+        const response = await network.post('/register',{ user: { ...formValues } })
         if(response){
             dispatch({type: REGISTER_SUCCESS})
-            dispatch(alert(`Success ${response.data}`))
+            //Have resource server send a success object so this works
+            console.dir(response.data.success)
+            dispatch(alert(response.data.success))
             history.push('/login')
         }
     }catch(err){
         dispatch({type: REGISTER_FAILURE})
         if(err.response){
-            dispatch(alert(`Error ${err.response.data}`))
+            dispatch(alert(`Error ${err.response.data.error}`))
         } else{
             dispatch(alert('A network error occurred'))
         }
