@@ -5,7 +5,7 @@ import alertReducer from './alertReducer';
 import userReducer from './userReducer';
 
 export default combineReducers({
-    auth: authReducer,
+    // auth: authReducer,
     alert: alertReducer,
     user: userReducer,
     form: formReducer

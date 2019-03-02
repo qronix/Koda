@@ -17,8 +17,10 @@ router.post('/register', verifyRegisterData, async function register (req, res, 
       }
     }
   } catch (err) {
-    if (err.response.status === 500 || err.response.status === 422) {
-      return next(new ApplicationError(err.response.data))
+    if (err.response) {
+      if (err.response.status === 500 || err.response.status === 422) {
+        return next(new ApplicationError(err.response.data))
+      }
     }
     return next(new ApplicationError('A network error occurred'))
   }
@@ -33,7 +35,7 @@ router.post('/login', verifyLoginData, async function login (req, res, next) {
     } else {
       if (response.status === 200) {
         // need to handle JWT?
-        res.status(200).json({ success: 'Logged in successfully', user: response.data })
+        res.status(200).json({ success: 'Logged in successfully', ...response.data })
       }
     }
   } catch (err) {

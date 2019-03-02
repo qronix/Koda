@@ -12,6 +12,11 @@ const store = createStore(
     reducers,
     composeEnhancers(applyMiddleware(reduxThunk))
 );
+
+store.subscribe(()=>{
+  localStorage.setItem('TOKEN', store.getState().user.token)
+})
+
 ReactDOM.render(
   <Provider store={store}>
     <App/>

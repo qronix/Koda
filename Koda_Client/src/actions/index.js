@@ -1,13 +1,18 @@
-import {SIGN_IN, REGISTER_REQUEST, ALERT, REGISTER_SUCCESS, REGISTER_FAILURE} from './types'
+import {SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_IN_FAILURE, REGISTER_REQUEST, ALERT, REGISTER_SUCCESS, REGISTER_FAILURE} from './types'
 import network from '../apis/network'
 import history from '../history'
 
 export const signIn = formValues => async (dispatch, getState) =>{
     try{
+        dispatch({type:SIGN_IN_REQUEST})
         const response = await network.post('/login',{ user: { ...formValues } })
         if(response){
-            dispatch({type:SIGN_IN, payload:response.data.userId})
-            dispatch(alert(response.data.success))
+            if(response.status === 200){
+                console.log({...response.data.user})
+                dispatch({type:SIGN_IN_SUCCESS, payload:{...response.data.user}})
+                dispatch(alert(response.data.success))
+            }
+            // send username and _id to store
         }
     } catch (err){
         dispatch(alert(`Error ${err.response.data}`))

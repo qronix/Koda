@@ -1,8 +1,11 @@
-import {REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE} from '../actions/types'
+import {REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE, SIGN_IN_REQUEST, SIGN_IN_FAILURE, SIGN_IN_SUCCESS} from '../actions/types'
 
 const INITIAL_STATE = {
     registering: null,
-    loggedIn: null
+    loggedIn: null,
+    _id: null,
+    username: null,
+    token: localStorage.getItem('TOKEN')
 }
 
 export default (state=INITIAL_STATE, action)=> {
@@ -12,6 +15,11 @@ export default (state=INITIAL_STATE, action)=> {
         case REGISTER_FAILURE:
         case REGISTER_SUCCESS:
             return {...state, registering: false}
+        case SIGN_IN_REQUEST:
+        case SIGN_IN_FAILURE:
+            return {...state, loggedIn: false, userId: null, TOKEN: null, username: null}
+        case SIGN_IN_SUCCESS:
+            return {...state, loggedIn: true, ...action.payload}
         default:
             return state
     }

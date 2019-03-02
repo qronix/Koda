@@ -8,6 +8,7 @@ import Register from './Register'
 import history from '../history'
 
 const App = (props) => {
+
   return (
     <div className="ui container">
     <div className={`ui floating message ${(props.alert.hidden) ? 'hidden' : ''}`}>{props.alert.message}</div>
@@ -24,6 +25,7 @@ const App = (props) => {
     </div>
   )
 }
+
 
 const mapStateToProps = (state) =>{
   const {alert} = state;

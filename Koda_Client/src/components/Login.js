@@ -15,6 +15,6 @@ const Login = (props) => {
 }
 
 const mapStateToProps = (state, ownProps)=>{
-    return {userId:state.auth.userId}
+    return {userId:state.user._id}
 }
 export default connect(mapStateToProps,{signIn})(Login)

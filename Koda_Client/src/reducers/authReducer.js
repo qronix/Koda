@@ -1,15 +1,19 @@
-import {SIGN_IN} from '../actions/types'
+// import {SIGN_IN, SIGN_IN_SUCCESS} from '../actions/types'
 
-const INITIAL_STATE = {
-    isSignedIn: null,
-    userId: null
-}
+// const INITIAL_STATE = {
+//     isSignedIn: null,
+//     userId: null,
+//     TOKEN: null
+// }
 
-export default (state= INITIAL_STATE, action)=>{
-    switch(action.type){
-        case SIGN_IN:
-          return {...state, isSignedIn:true, userId:action.payload}
-        default:
-          return state
-    }
-}
+// export default (state= INITIAL_STATE, action)=>{
+//     switch(action.type){
+//         case SIGN_IN:
+//           return { ...state, isSignedIn: false, userId: null, TOKEN: null }
+//         case SIGN_IN_SUCCESS:
+//           return { ...state, isSignedIn: true , ...action.payload}
+
+//         default:
+//           return state
+//     }
+// }
