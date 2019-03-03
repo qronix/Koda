@@ -6,6 +6,7 @@ import Home from './Home'
 import Login from './Login'
 import Register from './Register'
 import history from '../history'
+import Auth from './Auth'
 
 const App = (props) => {
 
@@ -19,6 +20,7 @@ const App = (props) => {
               <Route path='/' exact component={Home}></Route>
               <Route path='/login' exact component={Login}></Route>
               <Route path='/register' exact component={Register}></Route>
+              <Route path='/auth' exact component={Auth}></Route>
             </Switch>
         </div>
       </Router>

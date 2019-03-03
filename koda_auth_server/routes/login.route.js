@@ -2,10 +2,9 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 const auth = require('../middleware/auth')
-const {authRequest} = require('../middleware/authRequest')
-const User = require('../db/models/user')
+const {verifyRequest} = require('../middleware/verifyRequest')
 
-router.post('/login',authRequest,auth.optional,async function(req,res, next){
+router.post('/login',verifyRequest,auth.optional,async function(req,res, next){
     const {body:{user}} = req
 
     if(!user.username){

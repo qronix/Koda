@@ -1,20 +1,20 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import LoginForm from './LoginForm'
-import {signIn} from '../actions'
+import { signIn } from '../actions'
 
-const Login = (props) => {
+const Login = props => {
   return(
       <div>
-          <LoginForm onSubmit={props.signIn}/>
-          <div>Userid: {props.userId}</div>
+          <LoginForm onSubmit = { props.signIn }/>
+          <div>Userid: { props.userId }</div>
           <Link to="/register">Register</Link>
       </div>
   )
 }
 
-const mapStateToProps = (state, ownProps)=>{
-    return {userId:state.user._id}
+const mapStateToProps = (state, ownProps) => {
+    return { userId: state.user._id }
 }
-export default connect(mapStateToProps,{signIn})(Login)
+export default connect(mapStateToProps, { signIn })(Login)

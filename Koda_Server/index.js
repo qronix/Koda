@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000
 const app = express()
 
 const user = require('./routes/user')
+const resourceTest = require('./routes/resourceTest')
 
 if (process.env.NODE_ENV === 'development') {
   app.use(errorhandler())
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use(cors())
 app.use(user)
+app.use(resourceTest)
 
 app.use(function (err, req, res, next) {
   res.status(422).json({ error: err.message })

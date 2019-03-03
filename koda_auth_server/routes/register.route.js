@@ -1,14 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
-const {authRequest} = require('../middleware/authRequest')
+const {verifyRequest} = require('../middleware/verifyRequest')
 const User = require('../db/models/user')
 const constructError = require('../_helpers/constructError')
 const auth = require('../middleware/auth')
 
 //add middleware to validate the register request originated from
 //the resource server and not from a third party
-router.post('/register', authRequest, async function register(req,res,next){
+router.post('/register', verifyRequest, async function register(req,res,next){
     const {body: {user}} = req
     debugger
     if(!user.username){

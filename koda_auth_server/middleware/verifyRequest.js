@@ -1,5 +1,5 @@
 
-const authRequest = function(req,res,next){
+const verifyRequest = function(req,res,next){
     const REQUESTAUTHKEY = req.body.AUTHKEY
     const SERVERAUTHKEY  = process.env.AUTHKEY
     debugger
@@ -13,4 +13,4 @@ const authRequest = function(req,res,next){
     return next(new Error('An error occurred'))
 }
 
-module.exports = {authRequest}
+module.exports = {verifyRequest}

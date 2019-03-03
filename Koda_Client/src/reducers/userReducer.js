@@ -17,7 +17,7 @@ export default (state=INITIAL_STATE, action)=> {
             return {...state, registering: false}
         case SIGN_IN_REQUEST:
         case SIGN_IN_FAILURE:
-            return {...state, loggedIn: false, userId: null, TOKEN: null, username: null}
+            return {...state, loggedIn: false, _id: null, token: null, username: null}
         case SIGN_IN_SUCCESS:
             return {...state, loggedIn: true, ...action.payload}
         default:
