@@ -8,6 +8,7 @@ const Register = (props) => {
         <div>
             <RegisterForm onSubmit={props.register} alert={(message)=>props.alert(message)} registering={props.registering}/>
         </div>
+
     )
 }
 

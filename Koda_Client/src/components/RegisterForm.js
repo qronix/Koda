@@ -1,11 +1,20 @@
 import React from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {REGISTER_FORM_CONFIG} from '../_config'
+import {Container, Form, Button} from 'semantic-ui-react'
 
 const RegisterForm = (props) => {
     const {valid} = props
     return (
-        <form className="ui form small segment error register" onSubmit={props.handleSubmit}> 
+        <Container>
+            <Form className="error" onSubmit={props.handleSubmit}>
+                <Field name="username" component={renderSemInput} label="Username"/>
+                <Field name="password" component={renderSemInput} label="Password" type="password"/>
+                <Field name="password_confirm" component={renderSemInput} label="Confirm Password" type="password"/>
+                <Field name="email" label="Email" component={renderSemInput} label="Email" type="email"/>
+                <Button color='violet' loading={props.registering} disabled={!valid}>Register</Button>
+            </Form>
+                    {/* <form className="ui form small segment error" onSubmit={props.handleSubmit}> 
             <Field name="username" component={renderInput} label="Username"/>
             <Field type="password" component={renderInput} label="Password" name="password"/>
             <Field type="password" component={renderInput} label="Confirm Password" name="password_confirm"/>
@@ -13,14 +22,26 @@ const RegisterForm = (props) => {
             <button className="ui button" type="submit" disabled={false}>
                 {renderButton(props.registering)}
             </button>
-        </form>
+        </form> */}
+        </Container>
+    )
+}
+
+const renderSemInput = ({name, label, width, meta, type, input}) => {
+    const className= `field ${meta.error && meta.touched ? 'error' : ''}`
+    return(
+        <div>
+            <Form.Input label={label} name={name} width={width} type={type} className={className} {...input}></Form.Input>
+            {/* <Message error content={meta.error} attached bottom></Message> */}
+            {renderError(meta)}
+        </div>
     )
 }
 const renderButton = (registering)=>{
     if(!registering){
-        return 'Submit'
+        return 'Register'
     }else{
-        return <div className="ui active inline loader"></div>
+        return <div className="ui active inline"></div>
     }
 }
 const renderInput = ({input, label, meta, type})=>{

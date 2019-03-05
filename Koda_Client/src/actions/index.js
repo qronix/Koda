@@ -49,6 +49,7 @@ export const resourceRequest = (resource, options, token) => async (dispatch, ge
 }
 
 export const register = formValues => async (dispatch, getState) => {
+    console.dir(formValues)
     try {
         dispatch({ type: REGISTER_REQUEST })
         const response = await network.post('/register',{ user: { ...formValues } })
@@ -60,6 +61,7 @@ export const register = formValues => async (dispatch, getState) => {
             history.push('/login')
         }
     } catch (err) {
+        console.log(err)
         dispatch({ type: REGISTER_FAILURE })
         if (err.response) {
             dispatch(alert(err.response.data.error))
