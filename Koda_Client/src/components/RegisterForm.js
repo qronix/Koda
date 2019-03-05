@@ -5,7 +5,7 @@ import {REGISTER_FORM_CONFIG} from '../_config'
 const RegisterForm = (props) => {
     const {valid} = props
     return (
-        <form className="ui form segment error" onSubmit={props.handleSubmit}> 
+        <form className="ui form small segment error register" onSubmit={props.handleSubmit}> 
             <Field name="username" component={renderInput} label="Username"/>
             <Field type="password" component={renderInput} label="Password" name="password"/>
             <Field type="password" component={renderInput} label="Confirm Password" name="password_confirm"/>

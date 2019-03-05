@@ -6,10 +6,9 @@ const User = require('../db/models/user')
 const constructError = require('../_helpers/constructError')
 const auth = require('../middleware/auth')
 
-//add middleware to validate the register request originated from
-//the resource server and not from a third party
 router.post('/register', verifyRequest, async function register(req,res,next){
     const {body: {user}} = req
+    console.dir(user)
     debugger
     if(!user.username){
         return res.status(422).json({
@@ -22,7 +21,6 @@ router.post('/register', verifyRequest, async function register(req,res,next){
             error:'Password is required',
         })
     }
-   
     
     try{
         const finalUser = new User(user)

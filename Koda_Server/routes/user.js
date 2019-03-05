@@ -8,6 +8,7 @@ const AUTHKEY = process.env.AUTHKEY
 
 router.post('/register', verifyRegisterData, async function register (req, res, next) {
   try {
+    console.log(req.body.user)
     const response = await network.post('/register', { user: { ...req.body.user }, AUTHKEY })
     if (!response) {
       return next(new ApplicationError('Could not register'))
@@ -17,9 +18,10 @@ router.post('/register', verifyRegisterData, async function register (req, res, 
       }
     }
   } catch (err) {
+    console.log(err)
     if (err.response) {
       if (err.response.status === 500 || err.response.status === 422) {
-        return next(new ApplicationError(err.response.data))
+        return next(new ApplicationError(err.response.data.error))
       }
     }
     return next(new ApplicationError('A network error occurred'))

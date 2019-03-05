@@ -10,11 +10,9 @@ export const signIn = formValues => async (dispatch, getState) => {
         const response = await network.post('/login',{ user: { ...formValues } })
         if (response) {
             if (response.status === 200) {
-                console.log({ ...response.data.user })
                 dispatch({ type: SIGN_IN_SUCCESS, payload: { ...response.data.user } })
                 dispatch(alert(response.data.success))
             }
-            // send username and _id to store
         }
     } catch (err) {
         dispatch(alert(`Error ${err.response.data}`))
@@ -24,19 +22,25 @@ export const signIn = formValues => async (dispatch, getState) => {
 export const resourceRequest = (resource, options, token) => async (dispatch, getState) => {
     try {
         dispatch({ type: RESOURCE_REQUEST, payload: resource })
-        let myHeaders = new Headers()
-        myHeaders.set('Authorization',`Token ${ token }`)
-        const response = await network.get(resource, options)
+        const response = await network.get(resource, {
+            data: { ...options },
+            headers: {
+                'Authorization' : `Token ${token}`
+            }
+        })
         if (response) {
             if (response.status === 200) {
                 dispatch({ type: RESOURCE_REQUEST_SUCCESS, payload: { ...response.data.payload } })
             }
         }
     } catch (err) {
-        console.log(err)
         dispatch({ type: RESOURCE_REQUEST_FAILURE })
         if (err.response) {
             dispatch(alert(err.response.data.error))
+            if(err.response.status === 401){
+                dispatch({type: RESOURCE_REQUEST_FAILURE})
+                history.push('/')
+            }
         }
         else{
             dispatch(alert('Could not complete request'))
@@ -58,7 +62,7 @@ export const register = formValues => async (dispatch, getState) => {
     } catch (err) {
         dispatch({ type: REGISTER_FAILURE })
         if (err.response) {
-            dispatch(alert(`Error ${ err.response.data.error }`))
+            dispatch(alert(err.response.data.error))
         } else {
             dispatch(alert('A network error occurred'))
         }

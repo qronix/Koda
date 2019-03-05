@@ -1,22 +1,24 @@
 const ApplicationError = require('../_helpers/applicationError')
-const network = require('../apis/network')
+const { network } = require('../apis/network')
+const AUTHKEY = process.env.AUTHKEY
 
 const verifyAuth = async function (req, res, next) {
-  console.dir(req.headers)
   try {
-    const response = await network.post('/checkauth', {
-      data: {
-        user: { ...req.user }
-      },
-      headers: {
-        'Authorization': { ...req.headers.Authorization }
-      }
-    })
-    console.log(response.data)
+    const response = await network.post('/checkauth', { AUTHKEY }, { headers: { 'Authorization': req.headers.authorization } })
+    console.log(response.data.status)
+    if (response.data.status === 200) {
+      return next()
+    } else {
+      res.status(401).json({
+        error: 'Could not authorize'
+      })
+    }
   } catch (err) {
-    next(new ApplicationError('Could not auth user'))
+    console.log(err)
+    res.status(422).json({
+      error: 'An network error occurred'
+    })
   }
-  next()
 }
 
 module.exports = { verifyAuth }

@@ -24,16 +24,14 @@ const renderContent = (payload) => {
 }
 
 const Auth =  props => {
-    const [resource, setResource] = useState('payload')
+    const [payload, setPayload] = useState(props.payload)
 
     useEffect(() => {
-        console.log(props.user.token)
          props.resourceRequest('/resourceTest', null, props.user.token)
-        setResource(props.payload)
-    },[resource])
-    // await props.resourceRequest('/resourceTest', null, props.user.token)
+        setPayload(props.payload)
+    },[payload])
     return (
-        renderContent(resource)
+        renderContent(payload)
     )
 }
 
