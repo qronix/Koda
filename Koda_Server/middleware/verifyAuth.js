@@ -6,7 +6,7 @@ const verifyAuth = async function (req, res, next) {
   try {
     const response = await network.post('/checkauth', { AUTHKEY }, { headers: { 'Authorization': req.headers.authorization } })
     console.log(response.data.status)
-    if (response.data.status === 200) {
+    if (response.status === 200) {
       return next()
     } else {
       res.status(401).json({
@@ -14,7 +14,6 @@ const verifyAuth = async function (req, res, next) {
       })
     }
   } catch (err) {
-    console.log(err)
     res.status(422).json({
       error: 'An network error occurred'
     })

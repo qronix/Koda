@@ -7,12 +7,15 @@ import Login from './Login'
 import Register from './Register'
 import history from '../history'
 import Auth from './Auth'
+import {Message, Container} from 'semantic-ui-react'
 
 const App = (props) => {
 
   return (
-    <div className="ui container">
-    <div className={`ui floating message ${(props.alert.hidden) ? 'hidden' : ''}`}>{props.alert.message}</div>
+    // <div className="ui container">
+    <Container ui color='black'>
+    {/* <div className={`ui floating message ${(props.alert.hidden) ? 'hidden' : ''}`}>{props.alert.message}</div> */}
+    <Message className={`ui floating message ${(props.alert.hidden) ? 'hidden' : ''} ${props.alert.type === 'error' ? 'error' : 'success'}`} content={props.alert.message}/> 
       <Router history={history}>
         <div>
             <Header/>
@@ -24,7 +27,7 @@ const App = (props) => {
             </Switch>
         </div>
       </Router>
-    </div>
+    </Container>
   )
 }
 

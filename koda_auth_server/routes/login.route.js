@@ -25,7 +25,6 @@ router.post('/login',verifyRequest,auth.optional,async function(req,res, next){
 
             return res.json({user:user.toAuthJSON()})
         }
-
         return res.status(400).json({error:'Invalid login credentials'})
     })(req,res,next)
 })

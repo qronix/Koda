@@ -41,10 +41,14 @@ router.post('/login', verifyLoginData, async function login (req, res, next) {
       }
     }
   } catch (err) {
+    console.log(err.response.status)
     if (err.response.status === 500) {
       return next(new ApplicationError(err.response.data))
     }
-    return next(new ApplicationError('A network error occurred'))
+    if (err.response.status === 400) {
+      return next(new ApplicationError(err.response.data.error))
+    }
+    return next(new ApplicationError('Could not login'))
   }
   // send request to auth server
   // receive request from auth

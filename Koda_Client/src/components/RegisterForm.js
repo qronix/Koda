@@ -11,7 +11,7 @@ const RegisterForm = (props) => {
                 <Field name="username" component={renderSemInput} label="Username"/>
                 <Field name="password" component={renderSemInput} label="Password" type="password"/>
                 <Field name="password_confirm" component={renderSemInput} label="Confirm Password" type="password"/>
-                <Field name="email" label="Email" component={renderSemInput} label="Email" type="email"/>
+                <Field name="email" component={renderSemInput} label="Email" type="email"/>
                 <Button color='violet' loading={props.registering} disabled={!valid}>Register</Button>
             </Form>
                     {/* <form className="ui form small segment error" onSubmit={props.handleSubmit}> 
@@ -37,23 +37,23 @@ const renderSemInput = ({name, label, width, meta, type, input}) => {
         </div>
     )
 }
-const renderButton = (registering)=>{
-    if(!registering){
-        return 'Register'
-    }else{
-        return <div className="ui active inline"></div>
-    }
-}
-const renderInput = ({input, label, meta, type})=>{
-    const className = `field ${meta.error && meta.touched ? 'error' : ''}`
-    return(
-        <div className={className}>
-            <label>{label}</label>
-            <input type={type} {...input}/>
-            {renderError(meta)}
-        </div>
-    )
-}
+// const renderButton = (registering)=>{
+//     if(!registering){
+//         return 'Register'
+//     }else{
+//         return <div className="ui active inline"></div>
+//     }
+// }
+// const renderInput = ({input, label, meta, type})=>{
+//     const className = `field ${meta.error && meta.touched ? 'error' : ''}`
+//     return(
+//         <div className={className}>
+//             <label>{label}</label>
+//             <input type={type} {...input}/>
+//             {renderError(meta)}
+//         </div>
+//     )
+// }
 const renderError = ({error,touched})=>{
     if(touched && error){
         return(

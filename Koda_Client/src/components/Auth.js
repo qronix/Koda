@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 
 
 const renderContent = (payload) => {
+    console.dir(payload)
     if (!payload) {
         return (
-            <div className="ui segment">
+            <div className="ui">
                 <div className="ui active dimmer">
                     <div className="ui text loader">Loading</div>
                 </div>
@@ -16,7 +17,7 @@ const renderContent = (payload) => {
     }
     else {
         return(
-            <div className="ui segment">
+            <div className="ui">
                 {payload.content}
             </div>
         )
@@ -24,18 +25,18 @@ const renderContent = (payload) => {
 }
 
 const Auth =  props => {
-    const [payload, setPayload] = useState(props.payload)
-
+    const [resource={}, setResource] = useState(props.payload)
     useEffect(() => {
          props.resourceRequest('/resourceTest', null, props.user.token)
-        setPayload(props.payload)
-    },[payload])
+        setResource(props.payload)
+    },[resource])
     return (
-        renderContent(payload)
+        renderContent(props.payload)
     )
 }
 
 const mapStateToProps = (state, ownProps) => {
+    console.dir(state.resource.payload)
     return { payload: state.resource.payload, user: state.user }
 }
 
